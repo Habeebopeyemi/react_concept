@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, memo } from "react";
 import Task from "./Task";
 
 export type Todo = {
@@ -8,9 +8,10 @@ export type Todo = {
 
 interface Props {
   todoList: Todo[];
+  handleDelete: any
 }
 
-const List: FC<Props> = ({ todoList }) => {
+const List: FC<Props> = ({ todoList, handleDelete }) => {
   useEffect(() => {
     console.log("Rendering <List />");
   });
@@ -19,12 +20,12 @@ const List: FC<Props> = ({ todoList }) => {
     <>
       <ul>
         {/* map through list and pass it on to task */}
-        {todoList.map((todo: Todo) => (
-          <Task key={todo.id} id={todo.id} task={todo.task} />
+        {todoList?.map((todo: Todo) => (
+          <Task key={todo.id} id={todo.id} task={todo.task} handleDelete={handleDelete} />
         ))}
       </ul>
     </>
   );
 };
 
-export default List;
+export default memo(List);

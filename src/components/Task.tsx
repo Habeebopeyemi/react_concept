@@ -1,20 +1,23 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, memo } from "react";
 
 interface Props {
   id: number;
   task: string;
+  handleDelete: any;
 }
 
-const Task: FC<Props> = ({ task }) => {
+const Task: FC<Props> = ({ id, task, handleDelete }) => {
   useEffect(() => {
-    console.log("Rendering <Task />");
+    console.log("Rendering <Task />", task);
   });
 
   return (
     <>
-      <li>{task}</li>
+      <li>
+        {task} <button onClick={() => handleDelete(id)}>X</button>
+      </li>
     </>
   );
 };
 
-export default Task
+export default memo(Task);

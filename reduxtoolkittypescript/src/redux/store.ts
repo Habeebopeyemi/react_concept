@@ -1,5 +1,7 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import counterReducer from "./slice/counterSlice";
+// import counterReducer from "./slice/counterSlice";
+import { counterReducer } from "./createreducer/reducers";
+import { usersSlice } from "./createasyncthunk/createAsyncThunk";
 
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { pokemonApi } from "../services/pokemon";
@@ -7,6 +9,7 @@ import { pokemonApi } from "../services/pokemon";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    users: usersSlice.reducer,
     [pokemonApi.reducerPath]: pokemonApi.reducer,
     // posts: postsReducer,
     // comments: commentsReducer,
@@ -18,7 +21,7 @@ export const store = configureStore({
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
 // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

@@ -8,7 +8,7 @@ export type Todo = {
 
 interface Props {
   todoList: Todo[];
-  handleDelete: any
+  handleDelete: any;
 }
 
 const List: FC<Props> = ({ todoList, handleDelete }) => {
@@ -21,7 +21,12 @@ const List: FC<Props> = ({ todoList, handleDelete }) => {
       <ul>
         {/* map through list and pass it on to task */}
         {todoList?.map((todo: Todo) => (
-          <Task key={todo.id} id={todo.id} task={todo.task} handleDelete={handleDelete} />
+          <Task
+            key={todo.id}
+            id={todo.id}
+            task={todo.task}
+            handleDelete={handleDelete}
+          />
         ))}
       </ul>
     </>

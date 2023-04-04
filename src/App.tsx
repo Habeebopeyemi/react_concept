@@ -1,3 +1,16 @@
+import Notes from './components/Notes'
+import ContextApp from "./reactContext/index"
+
+const App = () => {
+  return (
+    // <Notes/>
+    <ContextApp/>
+  )
+}
+
+export default App
+// uncomment below section to learn about useEffect, memo, useMemo and useCallback
+/*
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import List from "./components/list";
 import type { Todo } from "./components/list";
@@ -10,6 +23,14 @@ function App() {
   const [task, setTask] = useState("");
   const [term, setTerm] = useState("");
 
+  const printTodoList = useCallback(() => {
+    console.log("Changing todoList", todoList);
+  }, [todoList]);
+
+  useEffect(() => {
+    printTodoList()
+  }, [todoList])
+  
   useEffect(() => {
     console.log("Rendering <App/>");
   });
@@ -34,19 +55,21 @@ function App() {
     setTodoList(filteredTodoList);
   };
 
-  const handleDelete = useCallback((taskId: number) => {
-    const newTodoList = todoList.filter((todo: Todo) => todo.id !== taskId);
-    setTodoList(newTodoList);
-  },[todoList]);
+  const handleDelete = useCallback(
+    (taskId: number) => {
+      const newTodoList = todoList.filter((todo: Todo) => todo.id !== taskId);
+      setTodoList(newTodoList);
+    },
+    [todoList]
+  );
+
   return (
     <>
       <input type="text" value={task} onChange={e => setTask(e.target.value)} />
       <button onClick={handleCreate}>Create</button>
       <button onClick={handleSearch}>Search</button>
-      {/* render the created list here */}
-      <List todoList={todoList} handleDelete={handleDelete} />
+     /* <List todoList={todoList} handleDelete={handleDelete} />
     </>
   );
 }
-
-export default App;
+*/
